@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("ssen.mvc.samples.modular.common.view.MessageSender")]
+	</fx:Metadata>
+
+	<!-- SkinParts
+	name=changeCurrent, type=spark.components.Button, required=true
+	name=input, type=spark.components.TextInput, required=false
+	name=toChildren, type=spark.components.Button, required=true
+	name=penetrate, type=spark.components.ToggleButton, required=true
+	name=toAll, type=spark.components.Button, required=true
+	name=toSelf, type=spark.components.Button, required=true
+	name=toParent, type=spark.components.Button, required=true
+	name=changeGlobal, type=spark.components.Button, required=true
+	-->
+
+	<s:layout>
+		<s:VerticalLayout paddingTop="0" paddingBottom="0" paddingLeft="0" paddingRight="0" gap="5"
+						  horizontalAlign="left" verticalAlign="top"/>
+	</s:layout>
+
+	<s:Group width="100%" height="20">
+		<s:layout>
+			<s:HorizontalLayout paddingTop="0" paddingBottom="0" paddingLeft="0" paddingRight="0" gap="5"
+								horizontalAlign="left" verticalAlign="middle"/>
+		</s:layout>
+
+		<s:TextInput id="input" width="100%" height="100%"/>
+		<s:ToggleButton id="penetrate" label="penetrate" height="100%" toolTip="toggle penetrate"/>
+		<s:Button id="toAll" label="G" height="100%" toolTip="dispatch to all"/>
+		<s:Button id="toParent" label="P" height="100%" toolTip="dispatch to parent"/>
+		<s:Button id="toChildren" label="C" height="100%" toolTip="dispatch to children"/>
+		<s:Button id="toSelf" label="S" height="100%" toolTip="dispatch to self"/>
+	</s:Group>
+
+	<s:Group width="100%" height="20">
+		<s:layout>
+			<s:HorizontalLayout paddingTop="0" paddingBottom="0" paddingLeft="0" paddingRight="0" gap="5"
+								horizontalAlign="right" verticalAlign="middle"/>
+		</s:layout>
+
+		<s:Button id="changeGlobal" label="change global" width="100%" height="100%"/>
+		<s:Button id="changeCurrent" label="change current" width="100%" height="100%"/>
+		<s:Button id="createChild" label="create child" width="100%" height="100%"/>
+	</s:Group>
+</s:Skin>
