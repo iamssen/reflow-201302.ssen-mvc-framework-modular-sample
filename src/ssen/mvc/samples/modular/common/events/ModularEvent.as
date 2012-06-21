@@ -1,6 +1,6 @@
 package ssen.mvc.samples.modular.common.events {
 	import flash.events.Event;
-	
+
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
 
 	public class ModularEvent extends Event {
@@ -11,6 +11,7 @@ package ssen.mvc.samples.modular.common.events {
 		public static const CHANGE_CURRENT_MODEL:String="changeCurrentModel";
 		public static const CHANGED_CURRENT_MODEL:String="changedCurrentModel";
 		public static const CREATE_CHILD:String="createChild";
+		public static const CLEAR_MESSAGES:String="clearMessages";
 
 		public var from:CurrentModel;
 		public var dispatchTarget:String;
@@ -24,6 +25,7 @@ package ssen.mvc.samples.modular.common.events {
 			var evt:ModularEvent=new ModularEvent(type);
 			evt.from=from;
 			evt.dispatchTarget=dispatchTarget;
+			evt.message=message;
 
 			return evt;
 		}

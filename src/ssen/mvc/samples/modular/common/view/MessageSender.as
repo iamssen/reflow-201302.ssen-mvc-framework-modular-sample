@@ -19,6 +19,7 @@ package ssen.mvc.samples.modular.common.view {
 		public const CHANGE_GLOBAL:String="changeGlobal";
 		public const CHANGE_CURRENT:String="changeCurrent";
 		public const CREATE_CHILD:String="createChild";
+		public const CLEAR_MESSAGES:String="clearMessages";
 
 
 		[SkinPart(required="true")]
@@ -47,6 +48,9 @@ package ssen.mvc.samples.modular.common.view {
 
 		[SkinPart]
 		public var createChild:Button;
+
+		[SkinPart]
+		public var clearMessages:Button;
 
 		//=========================================================
 		// 
@@ -87,7 +91,14 @@ package ssen.mvc.samples.modular.common.view {
 				changeCurrent.addEventListener(MouseEvent.CLICK, dispatchChangeCurrent, false, 0, true);
 			} else if (instance === createChild) {
 				createChild.addEventListener(MouseEvent.CLICK, dispatchCreateChild, false, 0, true);
+			} else if (instance === clearMessages) {
+				clearMessages.addEventListener(MouseEvent.CLICK, dispatchClearMessages, false, 0, true);
 			}
+
+		}
+
+		private function dispatchClearMessages(event:MouseEvent):void {
+			dispatchEvent(new Event(CLEAR_MESSAGES));
 		}
 
 		private function dispatchCreateChild(event:MouseEvent):void {
@@ -139,6 +150,8 @@ package ssen.mvc.samples.modular.common.view {
 				changeGlobal.removeEventListener(MouseEvent.CLICK, dispatchChangeCurrent);
 			} else if (instance === createChild) {
 				createChild.removeEventListener(MouseEvent.CLICK, dispatchCreateChild);
+			} else if (instance === clearMessages) {
+				clearMessages.removeEventListener(MouseEvent.CLICK, dispatchClearMessages);
 			}
 		}
 

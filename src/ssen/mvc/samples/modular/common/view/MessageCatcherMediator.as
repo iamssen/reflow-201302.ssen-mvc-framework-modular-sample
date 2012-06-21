@@ -22,17 +22,23 @@ package ssen.mvc.samples.modular.common.view {
 		}
 
 		public function onRegister():void {
+			dispatcher.addEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
 			dispatcher.addEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
 			dispatcher.addEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
 			dispatcher.addEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
 
-			view.appendText("Message Catcher Registered");
-			view.appendText("\n=================================");
+			appendText("Message Catcher Registered");
+			appendText("\n=================================");
+
 			printModelData();
 		}
 
+		private function clearMessages(event:ModularEvent):void {
+			view.text="";
+		}
 
 		public function onRemove():void {
+			dispatcher.removeEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
 			dispatcher.removeEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
 			dispatcher.removeEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
 			dispatcher.removeEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
@@ -40,23 +46,30 @@ package ssen.mvc.samples.modular.common.view {
 		}
 
 		private function refreshModelData(event:ModularEvent):void {
-			view.appendText("\n=================================");
-			view.appendText("\n" + event.toString());
+			appendText("\n=================================");
+			appendText("\n" + event.toString());
 			printModelData();
 		}
 
 		private function printModelData():void {
 			var msgs:Vector.<String>=new Vector.<String>;
-			msgs.push(">> global.time : " + global.getTime());
-			msgs.push(">> current.level : " + current.getLevel());
-			msgs.push(">> current.time : " + current.getTime());
+			msgs.push(">> " + global);
+			msgs.push(">> " + current);
 			msgs.push("--------------------------------------------------------");
 
-			view.appendText("\n" + msgs.join("\n"));
+			appendText("\n" + msgs.join("\n"));
 		}
 
 		private function receiveMessage(event:ModularEvent):void {
-			view.appendText("\n" + event.toString());
+			appendText("\n" + event.toString());
+		}
+
+		private function appendText(str:String):void {
+			if (view.textDisplay) {
+				view.appendText(str);
+			} else {
+				view.text=view.text + str;
+			}
 		}
 	}
 }

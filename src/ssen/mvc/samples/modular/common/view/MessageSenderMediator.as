@@ -28,6 +28,11 @@ package ssen.mvc.samples.modular.common.view {
 			view.addEventListener(view.CHANGE_CURRENT, changeCurrent, false, 0, true);
 			view.addEventListener(view.CHANGE_GLOBAL, changeGlobal, false, 0, true);
 			view.addEventListener(view.CREATE_CHILD, createChild, false, 0, true);
+			view.addEventListener(view.CLEAR_MESSAGES, clearMessages, false, 0, true);
+		}
+
+		private function clearMessages(event:Event):void {
+			dispatcher.dispatch(new ModularEvent(ModularEvent.CLEAR_MESSAGES), DispatchTarget.ALL);
 		}
 
 		private function createChild(event:Event):void {
@@ -84,6 +89,7 @@ package ssen.mvc.samples.modular.common.view {
 			view.removeEventListener(view.CHANGE_CURRENT, changeCurrent);
 			view.removeEventListener(view.CHANGE_GLOBAL, changeGlobal);
 			view.removeEventListener(view.CREATE_CHILD, createChild);
+			view.removeEventListener(view.CLEAR_MESSAGES, clearMessages);
 		}
 	}
 }

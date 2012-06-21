@@ -1,6 +1,6 @@
 package ssen.mvc.samples.modular.common.controller {
 	import flash.events.Event;
-
+	
 	import ssen.mvc.base.DispatchTarget;
 	import ssen.mvc.core.ICommand;
 	import ssen.mvc.core.IContextDispatcher;
@@ -21,8 +21,11 @@ package ssen.mvc.samples.modular.common.controller {
 		public function execute(event:Event=null):void {
 			global.refresh();
 
-			var target:String=(current.getLevel() === 1) ? DispatchTarget.SELF : DispatchTarget.CHILDREN;
+			dispatchChangedGlobal(DispatchTarget.SELF);
+			dispatchChangedGlobal(DispatchTarget.CHILDREN);
+		}
 
+		private function dispatchChangedGlobal(target:String):void {
 			var evt:ModularEvent=new ModularEvent(ModularEvent.CHANGED_GLOBAL_MODEL);
 			evt.from=current;
 			evt.dispatchTarget=target;

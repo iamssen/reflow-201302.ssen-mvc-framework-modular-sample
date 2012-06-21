@@ -1,11 +1,11 @@
-package ssen.mvc.samples.modular.top.view {
+package ssen.mvc.samples.modular.second.view {
 	import ssen.mvc.core.IContextDispatcher;
 	import ssen.mvc.core.IMediator;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.view.ChildrenGroup;
-	import ssen.mvc.samples.modular.second.SecondLevelModule;
+	import ssen.mvc.samples.modular.third.ThirdLevelModule;
 
-	public class TopChildrenGroupMediator implements IMediator {
+	public class SecondLevelChildrenGroupMediator implements IMediator {
 		[Inject]
 		public var dispatcher:IContextDispatcher;
 
@@ -20,9 +20,8 @@ package ssen.mvc.samples.modular.top.view {
 		}
 
 		private function createChild(event:ModularEvent):void {
-			var child:SecondLevelModule=new SecondLevelModule;
-			child.width=400;
-			child.percentHeight=100;
+			var child:ThirdLevelModule=new ThirdLevelModule;
+			child.percentWidth=90;
 			view.createChild(child);
 		}
 

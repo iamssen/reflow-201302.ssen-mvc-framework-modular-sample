@@ -1,15 +1,15 @@
-package ssen.mvc.samples.modular.top.model {
+package ssen.mvc.samples.modular.second.model {
 	import mx.formatters.DateFormatter;
-	
+
 	import ssen.log.formatToString;
 	import ssen.mvc.base.Actor;
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
 
-	public class CurrentModelTopImpl extends Actor implements CurrentModel {
+	public class SecondLevelCurrentModelImpl extends Actor implements CurrentModel {
 		private var _time:Date;
 		private var formatter:DateFormatter;
 
-		public function CurrentModelTopImpl() {
+		public function SecondLevelCurrentModelImpl() {
 			formatter=new DateFormatter;
 			formatter.formatString="HH:NN:SS";
 
@@ -17,7 +17,7 @@ package ssen.mvc.samples.modular.top.model {
 		}
 
 		public function getLevel():int {
-			return 1;
+			return 2;
 		}
 
 		public function getTime():Date {
@@ -34,7 +34,7 @@ package ssen.mvc.samples.modular.top.model {
 		}
 
 		public function toString():String {
-			return formatToString('[CurrentModelTopImpl level="{0}" time="{1}"]', getLevel(),
+			return formatToString('[SecondLevelCurrentModelImpl level="{0}" time="{1}"]', getLevel(),
 								  formatter.format(_time));
 		}
 	}
