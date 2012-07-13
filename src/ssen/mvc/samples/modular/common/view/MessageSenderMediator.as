@@ -1,15 +1,15 @@
 package ssen.mvc.samples.modular.common.view {
 	import flash.events.Event;
 
-	import ssen.mvc.base.DispatchTarget;
-	import ssen.mvc.core.IContextDispatcher;
+	import ssen.mvc.core.DispatchTo;
+	import ssen.mvc.core.IEventBus;
 	import ssen.mvc.core.IMediator;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
 
 	public class MessageSenderMediator implements IMediator {
 		[Inject]
-		public var dispatcher:IContextDispatcher;
+		public var eventBus:IEventBus;
 
 		[Inject]
 		public var current:CurrentModel;
@@ -32,11 +32,11 @@ package ssen.mvc.samples.modular.common.view {
 		}
 
 		private function clearMessages(event:Event):void {
-			dispatcher.dispatch(new ModularEvent(ModularEvent.CLEAR_MESSAGES), DispatchTarget.ALL);
+			eventBus.dispatchEvent(new ModularEvent(ModularEvent.CLEAR_MESSAGES), DispatchTo.ALL);
 		}
 
 		private function createChild(event:Event):void {
-			dispatcher.dispatch(new ModularEvent(ModularEvent.CREATE_CHILD));
+			eventBus.dispatchEvent(new ModularEvent(ModularEvent.CREATE_CHILD));
 		}
 
 		private function toMessage(target:String):void {
@@ -45,40 +45,40 @@ package ssen.mvc.samples.modular.common.view {
 			evt.from=current;
 			evt.dispatchTarget=target;
 
-			dispatcher.dispatch(evt, target, view.getPenetrate());
+			eventBus.dispatchEvent(evt, target, view.getPenetrate());
 		}
 
 		private function changeGlobal(event:Event):void {
-			var target:String=(current.getLevel() > 1) ? DispatchTarget.PARENT : DispatchTarget.SELF;
+			var target:String=(current.getLevel() > 1) ? DispatchTo.PARENT : DispatchTo.SELF;
 
 			var evt:ModularEvent=new ModularEvent(ModularEvent.CHANGE_GLOBAL_MODEL);
 			evt.from=current;
 			evt.dispatchTarget=target;
 
-			dispatcher.dispatch(evt, target, true);
+			eventBus.dispatchEvent(evt, target, true);
 		}
 
 		private function changeCurrent(event:Event):void {
 			var evt:ModularEvent=new ModularEvent(ModularEvent.CHANGE_CURRENT_MODEL);
 			evt.from=current;
 
-			dispatcher.dispatch(evt);
+			eventBus.dispatchEvent(evt);
 		}
 
 		private function toSelf(event:Event):void {
-			toMessage(DispatchTarget.SELF);
+			toMessage(DispatchTo.SELF);
 		}
 
 		private function toChildren(event:Event):void {
-			toMessage(DispatchTarget.CHILDREN);
+			toMessage(DispatchTo.CHILDREN);
 		}
 
 		private function toParent(event:Event):void {
-			toMessage(DispatchTarget.PARENT);
+			toMessage(DispatchTo.PARENT);
 		}
 
 		private function toAll(event:Event):void {
-			toMessage(DispatchTarget.ALL);
+			toMessage(DispatchTo.ALL);
 		}
 
 		public function onRemove():void {

@@ -1,5 +1,5 @@
 package ssen.mvc.samples.modular.top.view {
-	import ssen.mvc.core.IContextDispatcher;
+	import ssen.mvc.core.IEventBus;
 	import ssen.mvc.core.IMediator;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.view.ChildrenGroup;
@@ -7,7 +7,7 @@ package ssen.mvc.samples.modular.top.view {
 
 	public class TopChildrenGroupMediator implements IMediator {
 		[Inject]
-		public var dispatcher:IContextDispatcher;
+		public var eventBus:IEventBus;
 
 		private var view:ChildrenGroup;
 
@@ -16,7 +16,7 @@ package ssen.mvc.samples.modular.top.view {
 		}
 
 		public function onRegister():void {
-			dispatcher.addEventListener(ModularEvent.CREATE_CHILD, createChild);
+			eventBus.addEventListener(ModularEvent.CREATE_CHILD, createChild);
 		}
 
 		private function createChild(event:ModularEvent):void {
@@ -27,7 +27,7 @@ package ssen.mvc.samples.modular.top.view {
 		}
 
 		public function onRemove():void {
-			dispatcher.removeEventListener(ModularEvent.CREATE_CHILD, createChild);
+			eventBus.removeEventListener(ModularEvent.CREATE_CHILD, createChild);
 		}
 	}
 }

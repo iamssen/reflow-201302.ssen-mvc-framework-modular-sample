@@ -1,9 +1,9 @@
 package ssen.mvc.samples.modular.common.controller {
 	import flash.events.Event;
 	
-	import ssen.mvc.base.DispatchTarget;
+	import ssen.mvc.core.DispatchTo;
 	import ssen.mvc.core.ICommand;
-	import ssen.mvc.core.IContextDispatcher;
+	import ssen.mvc.core.IEventBus;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
 	import ssen.mvc.samples.modular.common.model.GlobalModel;
@@ -16,13 +16,13 @@ package ssen.mvc.samples.modular.common.controller {
 		public var current:CurrentModel;
 
 		[Inject]
-		public var dispatcher:IContextDispatcher;
+		public var eventBus:IEventBus;
 
 		public function execute(event:Event=null):void {
 			global.refresh();
 
-			dispatchChangedGlobal(DispatchTarget.SELF);
-			dispatchChangedGlobal(DispatchTarget.CHILDREN);
+			dispatchChangedGlobal(DispatchTo.SELF);
+			dispatchChangedGlobal(DispatchTo.CHILDREN);
 		}
 
 		private function dispatchChangedGlobal(target:String):void {
@@ -30,7 +30,7 @@ package ssen.mvc.samples.modular.common.controller {
 			evt.from=current;
 			evt.dispatchTarget=target;
 
-			dispatcher.dispatch(evt, target, true);
+			eventBus.dispatchEvent(evt, target, true);
 		}
 	}
 }

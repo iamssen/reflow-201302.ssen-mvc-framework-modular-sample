@@ -1,5 +1,5 @@
 package ssen.mvc.samples.modular.common.view {
-	import ssen.mvc.core.IContextDispatcher;
+	import ssen.mvc.core.IEventBus;
 	import ssen.mvc.core.IMediator;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
@@ -7,7 +7,7 @@ package ssen.mvc.samples.modular.common.view {
 
 	public class MessageCatcherMediator implements IMediator {
 		[Inject]
-		public var dispatcher:IContextDispatcher;
+		public var eventBus:IEventBus;
 
 		[Inject]
 		public var global:GlobalModel;
@@ -22,10 +22,10 @@ package ssen.mvc.samples.modular.common.view {
 		}
 
 		public function onRegister():void {
-			dispatcher.addEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
-			dispatcher.addEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
-			dispatcher.addEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
-			dispatcher.addEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
+			eventBus.addEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
+			eventBus.addEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
+			eventBus.addEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
+			eventBus.addEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
 
 			appendText("Message Catcher Registered");
 			appendText("\n=================================");
@@ -38,10 +38,10 @@ package ssen.mvc.samples.modular.common.view {
 		}
 
 		public function onRemove():void {
-			dispatcher.removeEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
-			dispatcher.removeEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
-			dispatcher.removeEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
-			dispatcher.removeEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
+			eventBus.removeEventListener(ModularEvent.CLEAR_MESSAGES, clearMessages);
+			eventBus.removeEventListener(ModularEvent.SEND_MESSAGE, receiveMessage);
+			eventBus.removeEventListener(ModularEvent.CHANGED_GLOBAL_MODEL, refreshModelData);
+			eventBus.removeEventListener(ModularEvent.CHANGED_CURRENT_MODEL, refreshModelData);
 			view=null;
 		}
 

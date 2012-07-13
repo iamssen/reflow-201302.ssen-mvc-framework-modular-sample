@@ -1,7 +1,7 @@
 package ssen.mvc.samples.modular.third {
 	import ssen.mvc.core.IContext;
 	import ssen.mvc.core.IContextView;
-	import ssen.mvc.ondisplay.DisplayContext;
+	import ssen.mvc.ondisplay.Context;
 	import ssen.mvc.samples.modular.common.controller.ChangeCurrentModel;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
 	import ssen.mvc.samples.modular.common.model.CurrentModel;
@@ -11,7 +11,7 @@ package ssen.mvc.samples.modular.third {
 	import ssen.mvc.samples.modular.common.view.MessageSenderMediator;
 	import ssen.mvc.samples.modular.third.model.ThirdLevelCurrentModelImpl;
 
-	public class ThirdLevelModuleContext extends DisplayContext {
+	public class ThirdLevelModuleContext extends Context {
 		public function ThirdLevelModuleContext(contextView:IContextView, parentContext:IContext=null) {
 			super(contextView, parentContext);
 		}

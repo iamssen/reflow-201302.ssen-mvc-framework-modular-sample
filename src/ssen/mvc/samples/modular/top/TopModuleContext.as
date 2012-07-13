@@ -1,7 +1,7 @@
 package ssen.mvc.samples.modular.top {
 	import ssen.mvc.core.IContext;
 	import ssen.mvc.core.IContextView;
-	import ssen.mvc.ondisplay.DisplayContext;
+	import ssen.mvc.ondisplay.Context;
 	import ssen.mvc.samples.modular.common.controller.ChangeCurrentModel;
 	import ssen.mvc.samples.modular.common.controller.ChangeGlobalModel;
 	import ssen.mvc.samples.modular.common.events.ModularEvent;
@@ -16,7 +16,7 @@ package ssen.mvc.samples.modular.top {
 	import ssen.mvc.samples.modular.top.model.GlobalModelImpl;
 	import ssen.mvc.samples.modular.top.view.TopChildrenGroupMediator;
 
-	public class TopModuleContext extends DisplayContext {
+	public class TopModuleContext extends Context {
 		public function TopModuleContext(contextView:IContextView, parentContext:IContext=null) {
 			super(contextView, parentContext);
 		}
